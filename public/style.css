@@ -132,3 +132,7 @@ button {
     width: unset;
     border: 1px solid var(--color-borde);
 }
+
+.bloque {
+    border: 2px dashed white;
+}

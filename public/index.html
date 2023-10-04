@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Funciones Hash</title>
+    <title>Busquedas y hash</title>
+    <link rel="icon"
+    href="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Escudo_UD.svg/248px-Escudo_UD.svg.png">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="style.css">
@@ -21,10 +23,17 @@
         <div class="divisor-elem" style="flex: 30%;">
             <h2>Operaciones</h2>
             <div class="contenedor operacion">
-                <h3>Iniciar arreglo</h3>
+                <h3>Iniciar estructura</h3>
                 <label for="i-n">n: </label>
                 <input class="i-numero" id="i-n" type="number" placeholder="Ingrese la n">
                 <button id="btn-iniciar-arr">Iniciar</button>
+                <br>
+                <label for="mem-opt">Tipo de memoria: </label>
+                <select id="mem-opt" style="width: 179px;">
+                    <option value="1">interna</option>
+                    <option value="2">externa</option>
+                </select>
+                <br>
                 <button id="btn-rellenar">Rellenar arreglo</button>
             </div>
             <div class="contenedor operacion">
@@ -66,9 +75,9 @@
             <div id="avisos">AVISOS</div>
         </div>
         <div class="divisor-elem" style="flex: 70%;">
-            <h2>Arreglo</h2>
+            <h2>Estructura</h2>
             <div id="tabla-arr" class="rejilla">
-                <h3>Por favor inicialice el arreglo</h3>
+                <h3>Por favor inicialice la estructura</h3>
             </div>
         </div>
     </div>

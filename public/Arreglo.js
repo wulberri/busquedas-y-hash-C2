@@ -1,7 +1,8 @@
-class Arreglo {
+class Estructura {
 
-    constructor(tam, arr=[]){
+    constructor(tam, externo=false, arr=[]){
         this.array = arr;
+        this.tamBloq = !externo ? false : Math.floor(Math.sqrt(tam));
         this.tam = tam
     }
 
@@ -53,15 +54,36 @@ class Arreglo {
         return -1;
     }
 
-    busquedaSecuencialG(elemento, i=0){
+    busquedaSecuencialG(elemento, i=0, nivelBloque=false){
         let _return = {
             completado: false,
-            valor: i+1,
+            nivelBloque: nivelBloque
         };
+        if(i == 0 && nivelBloque){
+            i = this.tamBloq-1;
+        }
         if(this.array[i] === elemento){
             _return.completado = true;
         }
-        i++;
+        _return.valor = i+1;
+        if(this.array[i] > elemento && nivelBloque){
+            nivelBloque = false;
+            i-= this.tamBloq;
+        }
+        if(!nivelBloque || !this.tamBloq){
+            i++;
+        }
+        else {
+            if(i == 0){
+                i = this.tamBloq-1;
+            }
+            else {
+                i += this.tamBloq;
+            }
+            if(i > this.tam){
+                i = this.tam-1;
+            }
+        }
         if(i > this.array.length){
             _return.valor = -1;
         }
@@ -70,7 +92,7 @@ class Arreglo {
             _return.next = ()=>_return;
         }
         else {
-            _return.next = ()=>this.busquedaSecuencialG(elemento, i)
+            _return.next = ()=>this.busquedaSecuencialG(elemento, i, nivelBloque)
         }
         return _return;
     }
