@@ -20,6 +20,7 @@ function control(){
     inicializarEventos();
     
     function formatoEnTabla(valor){
+        return valor.toString();
         let str = '0'.repeat(digsTam)+valor
         return str.substring(str.length-digsTam)
     }
@@ -50,7 +51,6 @@ function control(){
             throw 'n invalido'
         }
         let opt = parseInt(htmlElements.memOpt.selectedOptions[0].value);
-        console.log(opt)
         if(opt == 2){
             estructura = new Estructura(n, Math.sqrt(n));
         }
@@ -204,7 +204,8 @@ function control(){
             }
             let fila = document.createElement('div');
             fila.classList.add('fila');
-            fila.innerHTML = filaTemplate(i+1, valor.substring(valor.length-largoTam));
+            // fila.innerHTML = filaTemplate(i+1, valor.substring(valor.length-largoTam));
+            fila.innerHTML = filaTemplate(i+1, valor);
             let inputFila = fila.querySelector('.i-numero2');
             inputFila.addEventListener('input', ()=>{actualizarPosArr(i)});
             htmlElements.inputsTabla.push(inputFila);

@@ -80,8 +80,9 @@ class Estructura {
             else {
                 i += this.tamBloq;
             }
-            if(i > this.tam){
-                i = this.tam-1;
+            if(i > this.array.length){
+                i = this.array.length-1;
+                nivelBloque = false;
             }
         }
         if(i > this.array.length){
