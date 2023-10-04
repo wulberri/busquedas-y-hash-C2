@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>parcial</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <h2>Ejemplo de expanciones parciales</h2>
+    <div class="container">
+        <div class="change">
+        <label for="cubetas">ingrese el numero de cubetas iniciales:</label>
+        <input type="number" id="cubetas" min="0">
+        <label for="reg">ingrese el numero de registros por cubeta a ingresar:</label>
+        <input type="number" id="reg" min="0">    
+        <label for="porexp">ingrese el porcentaje en notacion decimal de la densidad de ocupacion de expancion:</label>
+        <input type="number" id="porexp" min="0"> 
+        <label for="porred">ingrese el porcentaje en notacion decimal de la densidad de ocupacion de reduccion:</label>
+        <input type="number" id="porred" min="0">   
+        <label for="hash">Opciones hash:</label>
+        <select id="hash">
+            <option value="mod">modulo</option>
+            <!-- <option value="azul">Azul</option>
+            <option value="verde">Verde</option>
+            <option value="amarillo">Amarillo</option> -->
+        </select>
+        </div>
+       <button id="enviar">Enviar</button> 
+       <button id="eliminar" class="none">Eliminar</button> 
+       
+    </div>
+    <div class="tabla">
+       <!-- <table>
+        <thead> -->
+            <!-- <tr> -->
+                <!-- <th>1</th>
+                <th>2</th>
+                <th>3</th> -->
+            <!-- </tr>
+        </thead>
+        <tbody> -->
+            <!-- <tr>
+                <td>1</td>
+                <td>Dato 2</td>
+                <td>Dato 3</td>
+            </tr>
+            <tr>
+                <td>Dato 4</td>
+                <td>Dato 5</td>
+                <td>Dato 6</td>
+            </tr> -->
+            <!-- Agrega más filas según sea necesario -->
+        <!-- </tbody>
+    </table>   -->
+    </div>
+   
+    
+    <script src="script.js"></script> 
+</body>
+</html>
