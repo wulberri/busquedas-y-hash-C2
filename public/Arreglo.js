@@ -22,7 +22,12 @@ class Estructura {
             this.array[ind] = elem;
         }
         else{
-            throw 'Colision'
+            if(typeof(this.array[ind]) == 'object'){
+                typeof(this.array[ind]).push(elem);
+            }
+            else {
+                this.array[ind] = [this.array[ind], elem]
+            }
         }
     }
 
@@ -47,7 +52,7 @@ class Estructura {
 
     busquedaSecuencial(elemento){
         for(let i=0; i<this.array.length; i++){
-            if(this.array[i] === elemento){
+            if(this.array[i] === elemento || (Array.isArray(this.array[i]) && this.array[i].indexOf(elemento) != -1)){
                 return i+1;
             }
         }
@@ -62,7 +67,7 @@ class Estructura {
         if(i == 0 && nivelBloque){
             i = this.tamBloq-1;
         }
-        if(this.array[i] === elemento){
+        if(this.array[i] === elemento || (Array.isArray(this.array[i]) && this.array[i].indexOf(elemento) != -1)){
             _return.completado = true;
         }
         _return.valor = i+1;
@@ -117,7 +122,7 @@ class Estructura {
             _return.valor = -1;
             _return.next = ()=>_return;
         }
-        if(this.array[mitad] == elemento){
+        if(this.array[mitad] == elemento || (Array.isArray(this.array[mitad]) && this.array[mitad].indexOf(elemento) != -1)){
             _return.completado = true;
             _return.next = ()=>_return;
         }
@@ -143,7 +148,7 @@ class Estructura {
         let max = this.array.length;
         while(min <= max){
             let mitad = Math.floor( (max+min)/2 );
-            if(this.array[mitad] == elemento){
+            if(this.array[mitad] == elemento || (Array.isArray(this.array[mitad]) && this.array[mitad].indexOf(elemento) != -1)){
                 return mitad+1;
             }
             else if(elemento < this.array[mitad]){

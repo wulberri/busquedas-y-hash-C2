@@ -20,6 +20,12 @@ function control(){
     inicializarEventos();
     
     function formatoEnTabla(valor){
+        if(typeof(valor) == 'object'){
+            return valor.join(',');
+        }
+        else {
+            return valor.toString();
+        }
         return valor.toString();
         let str = '0'.repeat(digsTam)+valor
         return str.substring(str.length-digsTam)
@@ -112,7 +118,7 @@ function control(){
                 }
         try{
             estructura.sset(hash, clave);
-            htmlElements.inputsTabla[hash-1].value = clave;
+            htmlElements.inputsTabla[hash-1].value = formatoEnTabla(estructura.array[hash-1]);
             htmlElements.avisos.textContent = "Clave agregada en el indice: "+hash;
         }
         catch(e){
@@ -130,6 +136,7 @@ function control(){
         htmlElements.avisos.textContent = 'Buscando..';
 
         if(isNaN(clave)){
+            htmlElements.avisos.textContent = 'Clave a buscar invalida';
             throw ("Clave invalida")
         }
         
@@ -225,8 +232,27 @@ function control(){
     }
 
     function actualizarPosArr(ind){
-        let valor = parseInt(htmlElements.inputsTabla[ind].value);
-        estructura.array[ind] = valor;
+        let texto = htmlElements.inputsTabla[ind].value;
+        let valor
+        let nan = false;
+        if(texto.indexOf(',') != -1){
+            valor = texto.split(',').map((x) => {
+                let n = parseInt(x);
+                if(isNaN(n)){
+                    nan = true;
+                }
+                return n;
+            });
+        }
+        else {
+            valor = parseInt(texto)
+        }
+        if (nan || (!Array.isArray(valor) && isNaN(valor))){
+            estructura.array[ind] = undefined;
+        }
+        else {
+            estructura.array[ind] = valor;
+        }
     }
     
     function eliminarPosArr(ind){
