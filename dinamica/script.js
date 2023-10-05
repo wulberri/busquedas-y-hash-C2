@@ -7,20 +7,30 @@ let mitad = 0;
 let tipo = "";
 let estructura;
 
-const ingresos = [];
+let ingresos = [];
 const colisiones = [];
 
 function actualizarTabla() {
     const tabla = document.createElement("table");
-    for (let i = 0; i < registros; i++) {
+    let regMax = 0;
+    estructura.map(cubeta => {
+        if(cubeta.length > regMax){
+            regMax = cubeta.length;
+        }
+        return cubeta;
+    })
+    for (let i = 0; i < regMax; i++) {
         const fila = document.createElement("tr");
         for (let j = 0; j < cubetas; j++) {
             const celda = document.createElement("td");
-            celda.className = "fila";
             celda.style.height = "5vh";
             celda.style.width = "5vh";
-            celda.style.border = "2px dashed white";
-            celda.textContent = estructura[j][i];
+            celda.className = "fila";
+            if(i <= registros-1){
+                console.log(i,j, estructura[j][i])
+                celda.style.border = "2px dashed white";
+            }
+            celda.textContent = estructura[j][i] != undefined ? estructura[j][i] : '';
             fila.appendChild(celda);
         }
         tabla.appendChild(fila);
@@ -31,6 +41,7 @@ function actualizarTabla() {
 }
 
 function iniciar() {
+    ingresos = []
     cubetas = parseInt(document.querySelector("#cubetas").value);
     doble = cubetas;
     registros = parseInt(document.querySelector("#reg").value);
@@ -45,7 +56,7 @@ function iniciar() {
     actualizarTabla();
 }
 
-function ingresar(key = null) {
+function ingresar(key = null, verificando = false) {
     if (!key)
         key = parseFloat(document.querySelector("#i-ach").value);
     const hash = document.querySelector("#hash-opt").value;
@@ -75,12 +86,17 @@ function ingresar(key = null) {
             break;
         };
     };
-    if (huboColision)
-        colisiones.push(key);
+    if (huboColision){
+        // colisiones.push(key);
+        estructura[ubicacion-1].push(key);
+    };
     if (!ingresos.includes(key))
         ingresos.push(key);
     actualizarTabla();
-    rectificarDensidadOcupacion();
+    if(!verificando){
+        rectificarDensidadOcupacion();
+    };
+    document.querySelector("#i-ach").focus();
 }
 
 function eliminar() {
@@ -152,49 +168,61 @@ function buscar() {
 }
 
 function rectificarDensidadOcupacion() {
-    if (((ingresos.length + colisiones.length) / (registros * cubetas)) > ampliamineto) {
-        if (mitad === 0 && tipo === "Parcial") {
+    let numRegsOcup = ingresos.length;
+    let disponibles = registros * cubetas;
+    if (numRegsOcup / disponibles >= ampliamineto) {
+        // if (mitad === 0 && tipo === "Parcial") {
+        if (tipo === "Parcial") {
             let auxmitad = parseInt(cubetas / 2);
             doble = cubetas;
-            estructura = new Array(cubetas + auxmitad);
             cubetas = cubetas + auxmitad;
+            estructura = new Array(cubetas);
             for (let i = 0; i < cubetas; i++)
                 estructura[i] = new Array(registros);
             for (let j = 0; j < ingresos.length; j++) {
                 const element = ingresos[j];
-                ingresar(element);
+                ingresar(element, true);
             };
             mitad = 1;
         } else {
-            estructura = new Array(doble * 2);
-            cubetas = doble * 2;
+            cubetas = cubetas * 2;
+            estructura = new Array(cubetas);
             for (var i = 0; i < cubetas; i++)
                 estructura[i] = new Array(registros);
             for (let index = 0; index < ingresos.length; index++) {
                 const element = ingresos[index];
-                ingresar(element);
+                ingresar(element, true);
             };
             mitad = 0;
         };
-    } else if (((ingresos.length + colisiones.length) / cubetas) > reduccion) {
-        if (mitad === 0 && tipo === "Parcial") {
-            estructura = new Array(doble);
-            cubetas = doble;
+    } else if (numRegsOcup/cubetas >= reduccion) {
+        // if (mitad === 0 && tipo === "Parcial") {
+        if (tipo === "Parcial") {
+            let nuevasCubetas = parseInt(cubetas*0.75);
+            if(nuevasCubetas <= 1){
+                return
+            }
+            cubetas = nuevasCubetas;
+            estructura = new Array(cubetas);
             for (let i = 0; i < cubetas; i++)
                 estructura[i] = new Array(registros);
             for (let j = 0; j < ingresos.length; j++) {
                 const element = ingresos[j];
-                ingresar(element);
+                ingresar(element, true);
             };
             mitad = 1;
         } else {
-            estructura = new Array(doble / 2);
-            cubetas = doble / 2;
+            let nuevasCubetas = cubetas/2;
+            if(nuevasCubetas <= 1){
+                return
+            }
+            cubetas = nuevasCubetas;
+            estructura = new Array(cubetas);
             for (var i = 0; i < cubetas; i++)
                 estructura[i] = new Array(registros);
             for (let index = 0; index < ingresos.length; index++) {
                 const element = ingresos[index];
-                ingresar(element);
+                ingresar(element, true);
             };
             mitad = 0;
         };
