@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Indice primario</title>
+</head>
+<body>
+    <div class="content">
+        
+        <label for="cantreg">Cantidad de registros</label>
+        <input type="number" name="cantreg" id="cantreg" min="0">
+        
+        <label for="longreg">Longitud por registro dato</label>
+        <input type="number" name="longreg" id="longreg" min="0">
+        
+        <label for="longind">Longitud por registro indice</label>
+        <input type="number" name="longind" id="longind" min="0">
+        
+        <label for="capbloq">Capacidad por bloque</label>
+        <input type="number" name="capbloq" id="capbloq" min="0">
+        
+    </div>
+    <button id="enviardatos">Enviar Datos de la memoria</button>
+    <br><br>
+    <label for="hash-opt-bus">Función: </label>
+    <select id="hash-opt" style="width: 179px;">
+        <option value="Modulo">Modulo</option>
+        <option value="Cuadrado">Cuadrado</option>
+        <option value="Plegamiento">Plegamiento</option>
+        <option value="Truncamiento">Truncamiento</option>
+    </select>
+    <br><br>
+    <label for="i-ach-bus">Clave: </label>
+    <input class="i-numero" id="i-ach" type="number" placeholder="Ingrese la clave">
+    <br><br>
+    <label for="elemento">Elemento: </label>
+    <input class="elemto" id="elemento" placeholder="Ingrese el elemento">
+    <br><br>
+    <button onclick="ingresar()" id="btn-agrega-clave-hash">Insertar</button>
+    <button onclick="buscar()" id="btn-agrega-clave-hash">Buscar</button>
+    <button onclick="eliminar()" id="btn-agrega-clave-hash">Eliminar</button>
+
+    <section class="divisor-elem" style="flex: 70%;" id="tabla">
+        <h2>Estructura</h2>
+        <div id="tabla-arr" class="rejilla">
+            <h3>Por favor inicialice la estructura</h3>
+        </div>
+    </section>
+    <script src="hash.js"></script> 
+    <script src="indicePrimarioscript.js"></script> 
+</body>
+</html>
