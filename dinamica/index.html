@@ -22,10 +22,10 @@
             <div class="contenedor operacion">
                 <h3>Estructura inicial</h3>
                 <label for="cubetas">Cubetas:</label>
-                <input class="i-numero" type="number" id="cubetas" min="0">
+                <input class="i-numero" type="number" id="cubetas" min="1" max="100" placeholder="1≤X≤100">
                 <br><br>
                 <label for="reg">Registros:</label>
-                <input class="i-numero" type="number" id="reg" min="0">
+                <input class="i-numero" type="number" id="reg" min="1" max="100" placeholder="1≤X≤100">
                 <br><br>
                 <label for="porexp">DO exp:</label>
                 <input class="i-numero" type="number" id="porexp" min="0" max="1" placeholder="0 ≤ x ≤ 1">
@@ -52,7 +52,7 @@
                 </select>
                 <br><br>
                 <label for="i-ach">Clave: </label>
-                <input class="i-numero" id="i-ach" type="number" placeholder="Ingrese la clave">
+                <input class="i-numero" min="0" max="1000" id="i-ach" type="number" placeholder="0≤X≤1000">
                 <br><br>
                 <button onclick="ingresar()" id="btn-agrega-clave-hash">Agregar</button>
             </div>
@@ -67,7 +67,7 @@
                 </select>
                 <br><br>
                 <label for="i-ach-eli">Clave: </label>
-                <input class="i-numero" id="i-ach-eli" type="number" placeholder="Ingrese la clave">
+                <input class="i-numero" min="0" max="1000" id="i-ach-eli" type="number" placeholder="0≤X≤1000">
                 <br><br>
                 <button onclick="eliminar()" id="btn-agrega-clave-hash">Eliminar</button>
             </div>
@@ -82,14 +82,14 @@
                 </select>
                 <br><br>
                 <label for="i-ach-bus">Clave: </label>
-                <input class="i-numero" id="i-ach-bus" type="number" placeholder="Ingrese la clave">
+                <input class="i-numero" min="0" max="1000" id="i-ach-bus" type="number" placeholder="0≤X≤1000">
                 <br><br>
                 <button onclick="buscar()" id="btn-agrega-clave-hash">Buscar</button>
                 <h3 id="elemento-encontrado"></h3>
             </div>
         </section>
         <section class="divisor-elem" style="flex: 70%;" id="tabla">
-            <h2>Estructura</h2>
+            <h2>Estructura</h2><span id="avisos" style="color: red;"></span>
             <div id="tabla-arr" class="rejilla">
                 <h3>Por favor inicialice la estructura</h3>
             </div>

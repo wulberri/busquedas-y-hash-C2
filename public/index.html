@@ -24,7 +24,7 @@
             <h2>Operaciones</h2>
             <div class="contenedor operacion">
                 <h3>Iniciar estructura</h3>
-                <label for="i-n">n: </label>
+                <label for="i-n">Rango: </label>
                 <input class="i-numero" id="i-n" type="number" placeholder="Ingrese la n">
                 <button id="btn-iniciar-arr">Iniciar</button>
                 <br>
@@ -37,7 +37,7 @@
                 <button id="btn-rellenar">Rellenar arreglo</button>
             </div>
             <div class="contenedor operacion">
-                <h3>Agregar clave</h3>
+                <h3>Agregar clave (Sólo numérica)</h3>
                 <label for="i-ac">Clave: </label>
                 <input class="i-numero" id="i-ac" type="number" placeholder="Ingrese la clave">
                 <button id="btn-agregar-clave">Agregar</button>
@@ -55,6 +55,7 @@
                 <label for="i-ach">Clave: </label>
                 <input class="i-numero" id="i-ach" type="number" placeholder="Ingrese la clave">
                 <button id="btn-agrega-clave-hash">Agregar</button>
+                <button id="btn-buscar-clave-hash">Buscar</button>
             </div>
             <div class="contenedor operacion">
                 <h3>Busquedas</h3>
@@ -72,10 +73,11 @@
                 <input class="i-numero" id="i-t" type="number" value="0.3" placeholder="Tiempo"><br>
                 <button id="btn-buscar">Buscar</button>
             </div>
-            <div id="avisos">AVISOS</div>
+            
         </div>
         <div class="divisor-elem" style="flex: 70%;">
             <h2>Estructura</h2>
+            <div id="avisos" style="color: red;"></div>
             <div id="tabla-arr" class="rejilla">
                 <h3>Por favor inicialice la estructura</h3>
             </div>

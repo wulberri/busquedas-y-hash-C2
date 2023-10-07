@@ -24,11 +24,12 @@ function control(){
             return valor.join(',');
         }
         else {
+            let str = '0'.repeat(digsTam)+valor
+            str = parseInt(str) == valor ? str : valor;
+            return str.substring(str.length-digsTam)
             return valor.toString();
         }
         return valor.toString();
-        let str = '0'.repeat(digsTam)+valor
-        return str.substring(str.length-digsTam)
     }
 
 
@@ -48,13 +49,20 @@ function control(){
         document.querySelector('#btn-rellenar').addEventListener('click', eventRellenar);
         document.querySelector('#btn-agregar-clave').addEventListener('click', eventAgregarClave);
         document.querySelector('#btn-agrega-clave-hash').addEventListener('click', eventAgregarHash);
+        document.querySelector('#btn-buscar-clave-hash').addEventListener('click', eventBusqHash);
         document.querySelector('#btn-buscar').addEventListener('click', eventBusqueda);
     }
 
     function eventIniciarEstr(){
         let n = parseInt(htmlElements.nInput.value);
+        htmlElements.avisos.textContent = ""
         if(n <= 0){
-            throw 'n invalido'
+            htmlElements.avisos.textContent = "Rango invalido"
+            throw 'Rango invalido'
+        }
+        else if(n > 5000){
+            htmlElements.avisos.textContent = "El rango no debe se mayor a 5000"
+            throw 'El rango no debe se mayor a 5000'
         }
         let opt = parseInt(htmlElements.memOpt.selectedOptions[0].value);
         if(opt == 2){
@@ -83,6 +91,8 @@ function control(){
                 if(isNaN(valor)){
                     throw 'Clave invalida';
                 }
+                let nvalor = parseInt(valor.toString().substring(digsTam));
+                valor = isNaN(nvalor) ? valor : nvalor;
                 htmlElements.inputsTabla[estructura.add(valor)].value = formatoEnTabla(valor);
             }
             catch(e){
@@ -115,7 +125,7 @@ function control(){
                 
                 default:
                     break;
-                }
+        }
         try{
             estructura.sset(hash, clave);
             htmlElements.inputsTabla[hash-1].value = formatoEnTabla(estructura.array[hash-1]);
@@ -124,6 +134,43 @@ function control(){
         catch(e){
             htmlElements.avisos.textContent = "ERROR: "+e;
         }
+    }
+
+    function eventBusqHash(){
+        let opt = parseInt(htmlElements.hashOpt.selectedOptions[0].value);
+        let clave = parseInt(htmlElements.inputHash.value);
+        let hash;
+        switch (opt) {
+            case 1:
+                hash = hashMod(clave, estructura.tam);
+                break;
+                case 2:
+                    hash = hashCuadrado(clave, estructura.tam);
+                break;
+                case 3:
+                    hash = hashPleg(clave, estructura.tam);
+                    break;
+                    case 4:
+                        let posiciones = [];
+                        for(let i=1; i<=digsTam; i+=2){
+                            posiciones.push(i);
+                }
+                hash = hashTruc(clave,posiciones);
+                break;
+                
+                default:
+                    break;
+        }
+        if(estructura.array[hash-1] == undefined || estructura.array[hash-1] == null){
+            htmlElements.avisos.textContent = "No encontrado";
+        }
+        else if(estructura.array[hash-1] == clave || (Array.isArray(estructura.array[hash-1]) && estructura.array[hash-1].indexOf(clave) != -1) ){
+            htmlElements.avisos.textContent = "Encontrado en la posicion: "+hash;
+        }
+        else{
+            htmlElements.avisos.textContent = "No encontrado";
+        }
+
     }
     
     function eventBusqueda(){
