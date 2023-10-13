@@ -118,6 +118,7 @@ function ingresar(key = null, verificando = false) {
     if (!verificando)
         rectificarDensidadOcupacion();
     document.querySelector("#i-ach").focus();
+    document.querySelector("#avisos").innerHTML = "Elemento insertado: " + key.toString();
 }
 
 function eliminar() {
@@ -137,6 +138,7 @@ function eliminar() {
         ingresos.splice(ingresos.indexOf(key), 1);
     actualizarTabla();
     rectificarDensidadOcupacion();
+    document.querySelector("#avisos").innerHTML = "Elemento eliminado: " + key.toString();
 }
 
 function buscar() {
@@ -154,9 +156,9 @@ function buscar() {
         };
     };
     if (elemento) {
-        document.querySelector("#elemento-encontrado").innerHTML = "Elemento encontrado: " + key.toString();
+        document.querySelector("#avisos").innerHTML = "Elemento encontrado: " + key.toString();
     } else {
-        document.querySelector("#elemento-encontrado").innerHTML = "Elemento no encontrado";
+        document.querySelector("#avisos").innerHTML = "Elemento "+key.toString()+" no encontrado";
     };
 }
 
