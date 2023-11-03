@@ -44,17 +44,27 @@ function obtenerUltimaFila() {
 function actualizarTabla() {
   const tabla = document.createElement("table");
   let regMax = obtenerUltimaFila();
-  for (let i = 0; i < regMax; i++) {
+  for (let i = -1; i < regMax; i++) {
     const fila = document.createElement("tr");
-    for (let j = 0; j < cubetas; j++) {
+    for (let j = -1; j < cubetas; j++) {
       const celda = document.createElement("td");
       celda.style.height = "5vh";
       celda.style.width = "5vh";
       celda.className = "fila";
       if (i <= registros - 1) {
-        celda.style.border = "2px dashed white";
+        celda.style.border =
+          "2px dashed " + (i === -1 || j === -1 ? "purple" : "white");
       }
-      celda.textContent = estructura[j][i] != undefined ? estructura[j][i] : "";
+      if (i === -1 && j === -1) {
+        celda.textContent = "";
+      } else if (i === -1) {
+        celda.textContent = j;
+      } else if (j === -1) {
+        celda.textContent = i + 1;
+      } else {
+        celda.textContent =
+          estructura[j][i] != undefined ? estructura[j][i] : "";
+      }
       fila.appendChild(celda);
     }
     tabla.appendChild(fila);
@@ -95,6 +105,7 @@ function iniciar() {
   actualizarTabla();
   rellenarEstructura();
   rectificarDensidadOcupacion();
+  avisos.innerHTML = "";
 }
 
 function ingresar(key = null, verificando = false) {
