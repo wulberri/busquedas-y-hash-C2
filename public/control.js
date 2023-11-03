@@ -94,6 +94,7 @@ function control(){
                 let nvalor = parseInt(valor.toString().substring(digsTam));
                 valor = isNaN(nvalor) ? valor : nvalor;
                 htmlElements.inputsTabla[estructura.add(valor)].value = formatoEnTabla(valor);
+                
             }
             catch(e){
                 htmlElements.avisos.textContent = "ERROR: "+e;
