@@ -36,6 +36,9 @@ class Estructura {
         this.array[ind] = elem;
     }
     add(elem){
+        if(this.array.indexOf(elem) != -1){
+            throw 'Clave repetida'
+        }
         if(this.array.length < this.tam){
             return this.array.push(elem)-1;
         }
