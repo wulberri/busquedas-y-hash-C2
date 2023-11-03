@@ -48,12 +48,17 @@ function actualizarTabla() {
     const fila = document.createElement("tr");
     for (let j = -1; j < cubetas; j++) {
       const celda = document.createElement("td");
-      celda.style.height = "5vh";
-      celda.style.width = "5vh";
-      celda.className = "fila";
+      // celda.style.height = "5vh";
+      // celda.style.width = "5vh";
+      celda.className = "fila celda-exp";
       if (i <= registros - 1) {
-        celda.style.border =
-          "2px dashed " + (i === -1 || j === -1 ? "purple" : "white");
+        // celda.style.border =
+        //   "2px dashed " + (i === -1 || j === -1 ? "purple" : "white");
+        celda.style.background =
+          (i === -1 || j === -1 ? "purple" : "white");
+        if(!(i === -1 || j === -1)){
+          celda.style.color = 'black'
+        }
       }
       if (i === -1 && j === -1) {
         celda.textContent = "";

@@ -174,3 +174,8 @@ button {
 .bloque {
     border: 2px dashed white;
 }
+
+.celda-exp {
+    text-align: center;
+    width: 100px;
+}
